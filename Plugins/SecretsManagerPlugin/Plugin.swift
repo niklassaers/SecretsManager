@@ -22,7 +22,13 @@ struct SecretsManagerPlugin: BuildToolPlugin {
            let outDate = outAttributes[.modificationDate] as? Date,
            envDate < outDate {
             Diagnostics.remark("\(outPath.string) is newer than \(envPath.string) so skipping re-generation")
-            return []
+            return [Command.buildCommand(
+                displayName: "Skip SecretsManager",
+                executable: Path("/bin/date"),
+                arguments: [outPath.string],
+                inputFiles: [],
+                outputFiles: [outPath]
+            )]
         }
         
         return nil
