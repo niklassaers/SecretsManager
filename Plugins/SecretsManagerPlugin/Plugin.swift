@@ -25,7 +25,7 @@ struct SecretsManagerPlugin: BuildToolPlugin {
             return [Command.buildCommand(
                 displayName: "Skip SecretsManager",
                 executable: Path("/bin/date"),
-                arguments: [outPath.string],
+                arguments: [],
                 inputFiles: [],
                 outputFiles: [outPath]
             )]
