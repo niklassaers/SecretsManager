@@ -21,7 +21,6 @@ struct SecretsManagerPlugin: BuildToolPlugin {
            let envDate = envAttributes[.modificationDate] as? Date,
            let outDate = outAttributes[.modificationDate] as? Date,
            envDate < outDate {
-            Diagnostics.remark("NJS - skip")
             Diagnostics.remark("\(outPath.string) is newer than \(envPath.string) so skipping re-generation")
             return []
         }
@@ -36,8 +35,6 @@ struct SecretsManagerPlugin: BuildToolPlugin {
         if let stopCommands = checkForWarnings(envPath: envPath, outPath: outPath) {
             return stopCommands
         }
-        
-        Diagnostics.remark("NJS - continue")
         
         return [command("SecretsManager", executable: try context.tool(named: "SecretsManager").path, envPath: envPath, outPath: outPath)]
     }
