@@ -20,7 +20,7 @@ struct SecretsManagerPlugin: BuildToolPlugin {
            let outAttributes = try? fileManager.attributesOfItem(atPath: outPath.string),
            let envDate = envAttributes[.modificationDate] as? Date,
            let outDate = outAttributes[.modificationDate] as? Date,
-           envDate > outDate {
+           envDate < outDate {
             Diagnostics.remark("\(outPath.string) is newer than \(envPath.string) so skipping re-generation")
             return []
         }
